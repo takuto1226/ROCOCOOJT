@@ -31,7 +31,7 @@ class CssController extends Controller
         $request->validate([
             'cssName' => 'required|string|max:255',
             'cssCode' => 'required|string',
-            'cssContent' => 'nullable|string',
+            'cssContent' => 'string',
         ]);
 
         DB::table('csses')->insert([

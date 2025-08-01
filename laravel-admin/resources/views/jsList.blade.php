@@ -8,6 +8,9 @@
         </a>
     </div>
 </div>
+@if (session('success'))
+    <div id="confomsg">{{ session('success') }}</div>
+@endif
 <table class="tablestyle-100">
     <thead>
         <tr>

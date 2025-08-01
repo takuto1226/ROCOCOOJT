@@ -32,9 +32,10 @@ class JsController extends Controller
         $request->validate([
             'jsName' => 'required|string|max:255',
             'jsCode' => 'required|string',
+            'jsContent' => 'string',
         ]);
 
-        DB::table('javascripts')->insert([
+        $id = DB::table('javascripts')->insertGetId([
             'jsName' => $request->input('jsName'),
             'jsCode' => $request->input('jsCode'),
             'jsContent' => $request->input('jsContent'),
@@ -43,6 +44,6 @@ class JsController extends Controller
             'jsUpdatedAt' => now(),
         ]);
 
-        return redirect()->route('jsList')->with('success', 'JavaScriptを登録しました。');
+        return redirect()->route('jsList')->with('success', 'JavaScriptを登録しました。ID:' . $id);
     }
 }

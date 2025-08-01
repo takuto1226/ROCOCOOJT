@@ -25,12 +25,12 @@ class UserController extends Controller
             'password' => 'required|confirmed|min:8',
         ]);
 
-        User::create([
+       $user = User::create([
             'name' => $request->name,
             'email' => $request->email,
             'password' => bcrypt($request->password),
         ]);
 
-        return redirect()->route('userList')->with('success', 'ユーザーを登録しました');
+        return redirect()->route('userList')->with('success', 'ユーザーを登録しました。ID:' . $user->id);
     }
 }

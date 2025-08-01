@@ -6,6 +6,9 @@
         <img src="{{ asset('images/icon_add.png') }}" alt="新規登録" class="icon">
     </a>
 </div>
+@if (session('success'))
+    <div id="confomsg">{{ session('success') }}</div>
+@endif
 <table class="tablestyle-100">
     <thead>
         <tr>
