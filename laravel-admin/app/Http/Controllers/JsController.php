@@ -32,7 +32,7 @@ class JsController extends Controller
         $request->validate([
             'jsName' => 'required|string|max:255',
             'jsCode' => 'required|string',
-            'jsContent' => 'string',
+            'jsContent' => 'required|string',
         ]);
 
         $id = DB::table('javascripts')->insertGetId([
