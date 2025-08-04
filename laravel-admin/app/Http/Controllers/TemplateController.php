@@ -6,6 +6,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
+use Symfony\Component\HttpFoundation\Response;
+
 
 class TemplateController extends Controller
 {
@@ -93,7 +95,23 @@ class TemplateController extends Controller
 
     public function update(Request $request, $id)
     {
+        $exist = DB::table('templates')->where('tmpId',$id);
+        if (!($exist->exists())) {
+            abort(Response::HTTP_NOT_FOUND);
+
+        }
         // テンプレート更新処理
+        $validated = $request->validate([
+            'tmpcode' => 'required|string|max:50|unique:templates,tmpcode,' . $id . ',tmpId',
+            'tmpname' => 'required|string|max:100',
+            'tmphtml' => 'required|string',
+            'cssId'  => 'nullable|integer|exists:csses,cssId',
+            'jsId'  => 'nullable|integer|exists:javascripts,jsId',
+        ]);
+
+        $validated['tmpupdatedatetime'] = now();
+
+        $exist->update($validated);
 
         return redirect()->route('templateList')->with('success', 'テンプレートを更新しました');
     }

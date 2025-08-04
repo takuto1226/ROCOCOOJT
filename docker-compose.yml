@@ -1,12 +1,10 @@
-version: '2.4'
-
 services:
   web:
     build:
       context: .
       dockerfile: Dockerfile
     volumes:
-      -  C:/php_development/laravel-admin:/app
+      -  C:/ROCOCOOJT/laravel-admin:/app
     working_dir: /app
     ports:
       - "8010:8010"  # ← ポート番号変更
@@ -20,7 +18,7 @@ services:
       context: .
       dockerfile: Dockerfile
     volumes:
-      - C:/php_development/laravel-front:/app  # 別プロジェクトや別コード
+      - C:/ROCOCOOJT/laravel-front:/app  # 別プロジェクトや別コード
     working_dir: /app
     ports:
       - "8011:8011"
